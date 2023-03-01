@@ -14,6 +14,23 @@ const CustomCamera = function (props: any) {
     }
   }, [size, props])
 
+  const parallax = (e: MouseEvent) => {
+    const mouseTolerance = 0.001
+
+    const centerX = window.innerWidth * 0.5
+    const centerY = window.innerHeight * 0.5
+    if (cameraRef.current) {
+      cameraRef.current.position.x = -1 * (e.clientX - centerX) * mouseTolerance
+      cameraRef.current.position.y = -1 * (e.clientY - centerY) * mouseTolerance
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("mousemove", parallax)
+
+    return () => window.removeEventListener("mousemove", parallax)
+  }, [])
+
   useEffect(() => {
     // @ts-ignore
     set(() => ({ camera: cameraRef.current }))

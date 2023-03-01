@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Normalize */
+input[type="text"]::-ms-clear {
+  display: none;
+}
+
 * {
   margin: 0;
   padding: 0;
