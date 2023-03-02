@@ -9,6 +9,9 @@ import { HexagonLayer } from "@deck.gl/aggregation-layers/typed"
 import { AmbientLight, LightingEffect, PointLight } from "@deck.gl/core/typed"
 import DeckGL from "@deck.gl/react/typed"
 
+import DataCard from "../../../components/city/data"
+import Visualization from "../../../components/city/visualization"
+
 // Source data CSV
 const DATA_URL =
   "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/3d-heatmap/heatmap-data.csv"
@@ -122,7 +125,7 @@ const City = ({
   }, [])
 
   return (
-    <div className="h-screen">
+    <div className="relative h-screen">
       <DeckGL
         layers={hexData}
         effects={[lightingEffect]}
