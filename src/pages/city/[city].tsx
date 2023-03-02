@@ -11,7 +11,7 @@ import DeckGL from "@deck.gl/react/typed"
 
 // Source data CSV
 const DATA_URL =
-  "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/3d-heatmap/heatmap-data.csv" // eslint-disable-line
+  "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/3d-heatmap/heatmap-data.csv"
 
 const ambientLight = new AmbientLight({
   color: [255, 255, 255],
@@ -40,10 +40,10 @@ const material: any = {
 }
 
 const INITIAL_VIEW_STATE = {
-  longitude: -1.415727,
-  latitude: 52.232395,
-  zoom: 6.6,
-  minZoom: 5,
+  longitude: 0.00415727,
+  latitude: 51.722395,
+  zoom: 8,
+  minZoom: 7,
   maxZoom: 15,
   pitch: 40.5,
   bearing: -27,
@@ -68,10 +68,12 @@ function getTooltip({ object }: any) {
   const lng = object.position[0]
   const count = object.points.length
 
+  console.log(lng)
   return `\
-    latitude: ${Number.isFinite(lat) ? lat.toFixed(6) : ""}
-    longitude: ${Number.isFinite(lng) ? lng.toFixed(6) : ""}
-    ${count} Accidents`
+  Longitude: ${Math.min(Number(lng * -10 * 79 + Math.random()), 80.23)}
+  Latitude: ${Number((lat / 50) * 18)}
+    Current ${count}
+    `
 }
 
 const City = ({
@@ -90,6 +92,7 @@ const City = ({
     csv(DATA_URL, (error: any, response: any) => {
       if (!error) {
         const data = response.map((d: any) => [Number(d.lng), Number(d.lat)])
+        console.log(data)
         const layers = [
           new HexagonLayer({
             id: "heatmap",
